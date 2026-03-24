@@ -1,0 +1,44 @@
+@fragment 
+fn fs( @builtin(position) pos : vec4f ) -> @location(0) vec4f {
+	let color = vec4f(1., 0., 0., 1.);
+	var p = uvN(pos.xy);  
+	var origin = floor((seconds()/2.) % (5. * PI) / PI);
+	//origin = 4;
+	if (origin == 0.) {
+		p = uvN(pos.xy);
+	}
+  	if (origin == 1.) {
+		p = uvN(pos.xy);
+		p = 1.-p;
+	}
+	if (origin == 2.) {
+		p = uvN(pos.xy);
+		p.y = 1.-p.y;
+	}
+	if (origin == 3.) {
+		p = uvN(pos.xy);
+		p.x = 1.-p.x;
+	}
+	if (origin == 4.) {
+		p = uvN(pos.xy);
+		p = p*2.-1.;
+	}
+	let pulse = sin(seconds()/2.);
+	var d = length(abs(cos(pulse*p))-.5);
+	//d = length(abs(cos(seconds()*p*10))-.5);
+	//d = length(abs(sin(pulse*p))-.5);
+
+	var out =  vec4f(vec3f(fract(d*10.0)),1.0);
+	let feedback = lastframe(uvN(pos.xy));
+
+	//out = out + feedback * 0.85;
+	//out = mix(out, feedback, 0.95);
+
+	var line = uvN(pos.xy)*2.-1.;
+	//line.x += audio[2] * tan(0.8 * sin(line.y+seconds()));
+	line.x += pulse + audio[2] * tan(0.8 * sin(line.y+seconds()));
+	var wave = 0.;
+	//wave = abs(.005 / line.x);
+
+	return out*color + vec4f(wave,0.,wave,1.);
+}
