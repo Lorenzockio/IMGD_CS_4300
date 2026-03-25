@@ -1,0 +1,29 @@
+My shader consists of two components that change over time, a distance field and a sin wave. The distance field had three forms. 
+The first two expand and contract using a sin() oscilator called pulse. One is shaped using sin() and the other uses cos(). The third form 
+expands infinitely based on seconds(). I manipulated these fields by changing the origin to be in a corner or in the center of the screen.
+My line is not truly a sin wave as I used tan(sin()) to have higher peaks. The wave is affected by audio[2]. I used a virtual cable to connect
+my headphone output to the input. This way I can use music instead of a microphone. I also utilized lastframe to create interesting feedback
+in two ways. One uses mix() and the other uses x + feedback * .y. 
+
+Aesthetically, I wanted everything to feel connected and flow together. I used PI to time the distance field transitions so that the origin
+only moved when the screen was black. When I manually changed things with comments, I tried to sync up with the music and current visuals like
+a DJ mixing music. One example is when I transition to a infinitely expanding distance field at a drop. For colors, I used a red background 
+mainly because I liked how the distance fields looked with black and red. My line is purple because it combines well with the red while still 
+standing out on its own. Looking closely you can see artifacts of red trailing offof the line. 
+
+All in all, I am proud of this as my first live code. I didn't get much feedback, but some people said they liked my transitions and my ending 
+fade which made me feel validated. Being self critical, I find some sections a little repetive and boring. In the last 30-40 seconds I didn't 
+make any real changes (I blame OBS for ruining previous takes). I probably should have picked a shorter song.
+
+Functions:
+floor()
+abs()
+sin()
+cos()
+tan()
+fract()
+lastframe()
+mix()
+vec4f()
+vec3f()
+uvN()
